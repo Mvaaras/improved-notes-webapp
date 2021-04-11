@@ -1,0 +1,20 @@
+<title> Notes | Your notes </title>
+{% if usernotes != [] %}
+<a href="/new">Create new</a> - <a href="/">Return</a>
+{% for note in usernotes %}
+<hr>
+<p>{{note[0]}}</p>
+<form action="/dele" method="post">
+<input type="hidden" value={{note[1]}} name ="id">
+<input type="submit" value="Delete">
+</form>
+{% endfor %}
+{% else %}
+<p>You have no notes</p>
+<hr>
+{% if session.user_id %}
+<a href="/new">Create new</a>
+{% else %}
+<p>You are not logged in</p>
+{% endif %}
+{% endif %}
