@@ -1,0 +1,8 @@
+<title> Notes </title>
+{% if session.user_id %}
+<p>You have logged in as {{ session.username }}</p>
+<p>View your <a href=/notes>notes</a> or <a href="/logout">Log out</a></p>
+{% else %}
+<h2> Improved online notes</h2>
+<p>Please <a href="/login">login</a> or <a href="/register">register</a></p>
+{% endif %}
