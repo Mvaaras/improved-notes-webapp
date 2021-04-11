@@ -3,7 +3,7 @@ from flask import render_template, request, redirect
 import users
 import notespy
 
-
+#routes
 @app.route("/")
 def index():
     return render_template("index.html")
