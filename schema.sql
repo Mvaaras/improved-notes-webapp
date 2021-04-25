@@ -10,3 +10,14 @@ CREATE TABLE notes (
     visibility TEXT,
     user_id INTEGER REFERENCES users
 );
+
+CREATE TABLE tags (
+    id SERIAL PRIMARY KEY,
+    tag TEXT
+);
+
+CREATE TABLE tagged (
+    id SERIAL PRIMARY KEY,
+    tag_id INTEGER REFERENCES tags,
+    user_id INTEGER REFERENCES users
+);
