@@ -1,7 +1,6 @@
-<title> Notes | Your notes </title>
-{% if usernotes != [] %}
-<a href="/new">Create new</a> - <a href="/">Return</a>
-{% for note in usernotes %}
+<title> Notes | {{tag}} </title>
+<p>Viewing tag "{{tag}}" - <a href="/notes">Return to notes</a></p>
+{% for note in tagnotes %}
 <hr>
 <p>{{note[0]}}</p>
 {% for tag in tags[note[1]]%}
@@ -20,12 +19,3 @@
 </form>
 </div>
 {% endfor %}
-{% else %}
-<p>You have no notes</p>
-<hr>
-{% if session.user_id %}
-<a href="/new">Create new</a> - <a href="/">Return</a>
-{% else %}
-<p>You are not logged in</p>
-{% endif %}
-{% endif %}
