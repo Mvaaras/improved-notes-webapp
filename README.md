@@ -4,9 +4,9 @@ A web app for keeping and organizing personal notes. You can test the app [here]
 ## Current functionality
 * Users will be able to register/log in and create personal, semi private notes
 * Notes can be tagged on creation, and notes can be filtered by tag. One note may have multiple tags.
-* Notes can be deleted and edited by the user who created them
+* Notes and the tags associated can be deleted and edited by the user who created them
 
-Most of the important functionality is now working as intended, though there are still some issues with the app I'd like to work on before it's finished. I'd like to add the ability to edit tags after a note has been created. Additionally I'd like to improve the layout. I am not sure if this kind of app actually needs note sharing or administrators (as those are not functions I would personally need), which is why I have not worked on those yet.
+All the important functionality is now working as intended. I do not think this kind of app actually needs note sharing or administrators (as those are not functions I would personally need), which is why I ended up not adding them, even if that means that the app ended up somewhat simple. I'm still happy with the finished version.
 
 
 ## Original plans for app functionality
@@ -19,4 +19,4 @@ Most of the important functionality is now working as intended, though there are
 * Administrators can view all registered users, registration date and  and delete their accounts
 
 
-*I am making this project because keeping organized, somewhat private notes is something I often want to do on multiple devices at once, and I feel a web app like this would be really useful for me.*
+*I decided to make this project for the course because keeping organized, somewhat private notes is something I often want to do on multiple devices at once, and I felt like a web app like this would be really useful for me.*
