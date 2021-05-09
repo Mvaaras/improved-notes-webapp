@@ -19,5 +19,5 @@ CREATE TABLE tags (
 CREATE TABLE tagged (
     id SERIAL PRIMARY KEY,
     tag_id INTEGER REFERENCES tags,
-    user_id INTEGER REFERENCES users
+    note_id INTEGER REFERENCES notes
 );

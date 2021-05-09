@@ -3,7 +3,10 @@
     Note: <br>
     <textarea name="notecontent">{{note[0]}}</textarea>
     <p></p>
+    Edit tags (seperate tags with commas): <input type="text" name="tags" value="{{tags}}" > <br>
+    <p></p>
     <input type="hidden" value={{note[1]}} name ="id">
     <input type="hidden" value='f' name ="status">
+    <input type="hidden" value="{{tags}}" name = "old_tags">
     <input type="submit" value="Edit note">
 </form>

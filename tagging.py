@@ -3,7 +3,9 @@ from db import db
 def add_tags(tags,id):
     if len(tags) == 0:
         return True
-    adding = [tag.strip() for tag in tags.split(",")]
+    #duplicate tags are not allowed (they break stuff), so we just turn this into a set for a second to get rid of those
+    #i am well aware that my method of programming involves copious amounts of ducktape and almost nothing else
+    adding = list(set([tag.strip() for tag in tags.split(",")]))
     for tag in adding:
         sql_id = "SELECT id FROM tags WHERE tag =:tag"
         tag_id = db.session.execute(sql_id,{"tag":tag}).fetchone()
@@ -30,3 +32,11 @@ def tag_notes(notes):
     for note in notes:
         tags[note[1]] = get_tags(note[1])
     return tags
+
+#removing tags is used when you edit them
+#editing tags means that we delete all the old tags and then add new ones :)
+#this only happens if you make changes to the tags though
+def remove_tags(id):
+    sql = "DELETE FROM tagged WHERE note_id=:note_id"
+    db.session.execute(sql, {"note_id":id})
+    db.session.commit()

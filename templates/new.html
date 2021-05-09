@@ -1,4 +1,6 @@
-<title>Notes | Create new</title>
+{% extends "layout.html" %}
+{% block title %}Create new{% endblock %}
+{% block content %}
 <form action="/new" method="post">
     Note: <br>
     <textarea name="notecontent"></textarea>
@@ -6,3 +8,4 @@
     Add tags (seperate tags with commas): <input type="text" name="tags"> <br>
     <input type="submit" value="Create note">
 </form>
+{% endblock %}

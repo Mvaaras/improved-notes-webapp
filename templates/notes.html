@@ -1,15 +1,18 @@
-<title> Notes | Your notes </title>
+{% extends "layout.html" %}
+{% block title %}Your notes{% endblock %}
+{% block content %}
 {% if usernotes != [] %}
 <a href="/new">Create new</a> - <a href="/">Return</a>
 {% for note in usernotes %}
 <hr>
 <p>{{note[0]}}</p>
 {% for tag in tags[note[1]]%}
-<a href="tag/{{tag[0]}}"">{{tag[0]}}</a>,   
+<a href="tag/{{tag[0]}}">{{tag[0]}}</a>,   
 {% endfor %}
 <div style="display: flex;">
 <form action="/dele" method="post">
     <input type="hidden" value={{note[1]}} name ="id">
+    <input type="hidden" value={{session.user_id}} name ="user">
     <input type="submit" value="Delete">
 </form>
 &nbsp &nbsp
@@ -29,3 +32,4 @@
 <p>You are not logged in</p>
 {% endif %}
 {% endif %}
+{% endblock %}

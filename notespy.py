@@ -1,6 +1,7 @@
 from db import db
 import users
 import tagging
+from flask import session
 
 #note visibility; 'd' for deleted (not visible to anyone), 'h' for hidden (visible to the person who created the note) and 'p' for public (visible to anyone on the creator's profilem not yet implemented)
 
@@ -39,8 +40,12 @@ def edit_note(note,id):
         return False
     return True
 
-#"delete" doesn't actually delete the note, just sets the visibility to 'd' (deleted) and removes the contents. basically the same thing as far as the user is concerned.
-def delete(id):
+#"delete" doesn't actually delete the note, just sets the visibility to 'd' (deleted) and removes the contents. basically the same thing as far as the user is concerned, as deleted notes never show up.
+def delete(id,user):
+    sql = "SELECT user_id FROM notes WHERE id=:id"
+    verify = db.session.execute(sql, {"id":id}).fetchall()
+    if str(user) != str(verify[0][0]):
+        return False
     sql = "UPDATE notes SET visibility = 'd', note = ' ' WHERE id=:id"
     db.session.execute(sql, {"id":id})
     db.session.commit()

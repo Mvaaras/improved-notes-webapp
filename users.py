@@ -18,15 +18,19 @@ def login(username,password):
             return False
 
 def register(username,password):
-    if len(username) != 0 and len(password) > 3:
-        hash_value = generate_password_hash(password)
+    if len(username) == 0:
+        return "Username can't be empty" 
+    if len(password) < 4:
+        return "Password must be at least 4 characters long"
+        
+    hash_value = generate_password_hash(password)
 
-        try:
-            sql = "INSERT INTO users (username,password) VALUES (:username,:password)"
-            db.session.execute(sql, {"username":username,"password":hash_value})
-            db.session.commit()
-        except:
-            return False
+    try:
+        sql = "INSERT INTO users (username,password) VALUES (:username,:password)"
+        db.session.execute(sql, {"username":username,"password":hash_value})
+        db.session.commit()
+    except:
+        return "Registration Failed"
 
     return login(username,password)
 

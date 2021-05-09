@@ -16,10 +16,11 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if users.register(username,password):
+        registration = users.register(username,password)
+        if registration == True:
             return redirect("/")
         else:
-            return render_template("error.html",message="Registration failed")
+            return render_template("error.html",message=registration)
 
 @app.route("/login", methods=["get","post"])
 def login():
@@ -62,9 +63,8 @@ def new():
 @app.route("/dele", methods=["get","post"])
 def dele():
     if request.method == "POST":
-        print("somehow this one")
         deleting = request.form["id"]
-        if notespy.delete(deleting):
+        if notespy.delete(deleting,request.form["user"]):
             return redirect("/notes")
         else:
             return render_template("error.html",message="Could not delete note")
@@ -76,15 +76,23 @@ def edit():
     if request.method == "POST" and request.form["status"] == 'e':
         editing = request.form["id"]
         note=notespy.get_one(editing)
-        return render_template("edit.html",note=note)
+        tags=tagging.get_tags(editing)
+        tagsstr = ""
+        for tag in tags:
+            tagsstr += tag[0] + ", "
+        return render_template("edit.html",note=note,tags=tagsstr[:-2])
     elif request.form["status"] == 'f':
         note = request.form["notecontent"]
         id = request.form["id"]
         if notespy.edit_note(note,id):
+            if request.form["tags"] != request.form["old_tags"]:
+                tagging.remove_tags(id)
+                tagging.add_tags(request.form["tags"],id)
             return redirect("/notes")
         else:
             return render_template("error.html",message="Editing the note failed")
-    else: return render_template("error.html",message="Yeah something clearly went wrong, sort it out champ")
+        
+    else: return render_template("error.html",message="Yeah something clearly went wrong, I have no idea what it was, I have never seen this error message in action and I really don't plan to either. Applause to you for making it happen, I guess.")
 
 @app.route("/tag/<string:tag>")
 def tag(tag):

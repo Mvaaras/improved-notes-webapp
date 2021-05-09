@@ -1,14 +1,17 @@
-<title> Notes | {{tag}} </title>
+{% extends "layout.html" %}
+{% block title %}Tag: {{tag}}{% endblock %}
+{% block content %}
 <p>Viewing tag "{{tag}}" - <a href="/notes">Return to notes</a></p>
 {% for note in tagnotes %}
 <hr>
 <p>{{note[0]}}</p>
 {% for tag in tags[note[1]]%}
-<a href="tag/{{tag[0]}}"">{{tag[0]}}</a>,   
+<a href="/tag/{{tag[0]}}">{{tag[0]}}</a>,   
 {% endfor %}
 <div style="display: flex;">
 <form action="/dele" method="post">
     <input type="hidden" value={{note[1]}} name ="id">
+    <input type="hidden" value={{session.user_id}} name ="user">
     <input type="submit" value="Delete">
 </form>
 &nbsp &nbsp
@@ -19,3 +22,4 @@
 </form>
 </div>
 {% endfor %}
+{% endblock %}

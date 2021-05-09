@@ -1,4 +1,6 @@
-<title> Notes | Login </title>
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
 <form action="/login" method="post">
     Username: <input type="text" name="username">
     <p>
@@ -6,3 +8,4 @@
     <p>
     <input type="submit" value="Login">
     </form>
+{% endblock %}

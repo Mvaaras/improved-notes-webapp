@@ -1,0 +1,5 @@
+<title>Notes | {% block title %}{% endblock %}</title>
+<h2> Online notes</h2>
+<a href="/">Index</a> - {% if session.user_id %}<a href="/notes">Notes</a> - <a href="/logout">Logout</a> {% else %} <a href="/login">login</a> - <a href="/register">register</a> {% endif %}
+<hr>
+{% block content %}{% endblock %}
